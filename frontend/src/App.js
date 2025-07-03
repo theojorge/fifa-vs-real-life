@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:8000"; // Fallback para desarrollo local
+
 export default function App() {
   const [playerName, setPlayerName] = useState("");
   const [loading, setLoading] = useState(false);
@@ -13,7 +15,7 @@ export default function App() {
     setCards([]);
 
     try {
-      const res = await fetch("http://localhost:8000/predict", {
+      const res = await fetch(`${API_BASE_URL}/predict`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ player_name: playerName }),

@@ -2,6 +2,6 @@
 
 Machine learning proyect
 
-# Para levantar ejecutar esto en la carpeta backend
+# Para levantar el proyecto y probarlo, ejecutar este script y entrar a localhost/8000
 
-uvicorn main:app --host 0.0.0.0 --port 8000
+./start.sh
