@@ -10,6 +10,15 @@ from pathlib import Path
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Changed from "http://localhost:3000" to "*"
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all HTTP methods (GET, POST, etc.)
+    allow_headers=["*"],  # Allows all headers
+)
+
+
 @app.get("/api/data")
 async def get_data():
     return {"mensaje": "¡Hola desde la API!"}
@@ -40,14 +49,6 @@ async def serve_frontend(full_path: str):
         return HTMLResponse(content="<h1>Frontend no encontrado</h1><p>Asegúrate de que index.html esté en la carpeta frontend/build.</p>", status_code=404)
     with open(index_html_path, "r") as f:
         return HTMLResponse(content=f.read())
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # o ["*"] para permitir todos
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
 
 # Cargar componentes del modelo
 model_components = load_model_components("fifa_model.pkl")
